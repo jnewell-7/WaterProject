@@ -1,3 +1,4 @@
+using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WaterProject.API.Data;
@@ -18,6 +19,17 @@ namespace WaterProject.API.Controllers
         [HttpGet("AllProjects")]
         public IActionResult GetProjects(int pageSize = 10, int pageNum = 1)
         {
+            string? favProjType = Request.Cookies["FavoriteProjectType"];
+            Console.WriteLine("~~~~~COOKIE~~~~~\n" + favProjType);
+            
+            HttpContext.Response.Cookies.Append("FavoriteProjectType", "Protected Spring", new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.None,
+                Expires = DateTime.Now.AddMinutes(1),
+            });
+            
             var something =  _waterContext.Projects
             .Skip((pageNum - 1) * pageSize)
             .Take(pageSize)

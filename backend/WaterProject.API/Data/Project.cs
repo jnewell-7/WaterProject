@@ -8,7 +8,7 @@ public class Project
     public int ProjectId { get; set; }
     
     [Required]
-    public string ProjectName { get; set; }
+    public required string ProjectName { get; set; }
     
     public string? ProjectType { get; set; }
     public string? ProjectRegionalProgram { get; set; }
