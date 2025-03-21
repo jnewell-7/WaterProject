@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Project } from "./types/Project";
 
+
 function ProjectList() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [pageSize, setPageSize] = useState<number>(10);
