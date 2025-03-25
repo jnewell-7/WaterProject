@@ -1,14 +1,16 @@
 import { getFingerprint } from "@thumbmarkjs/thumbmarkjs";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
-export const getFingerprintId = async () => {
-  const [fingerprint, setFingerPrint] = useState<string | null>(null)
+export const Fingerprint = () => {
+  const [fingerprint, setFingerprint] = useState<string | null>(null);
 
   useEffect(() => {
-    getFingerprint().then((fingerprint) => { setFingerPrint(fingerprint) })
-  }, [])
+    getFingerprint().then((fingerprint) => {
+      setFingerprint(fingerprint);
+    });
+  }, []);
 
-  return <div>{fingerprint}</div>
+  return <div>{fingerprint}</div>;
 };
 
-export default getFingerprintId;
+export default Fingerprint;
