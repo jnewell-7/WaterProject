@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Project } from "./types/Project";
 
-
 function ProjectList() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [pageSize, setPageSize] = useState<number>(10);
@@ -28,8 +27,6 @@ function ProjectList() {
 
   return (
     <>
-      <h1>Water Projects</h1>
-      <br />
       {projects.map((p) => (
         <div id="projectCard" className="card" key={p.projectId}>
           <h3 className="card-title">{p.projectName}</h3>

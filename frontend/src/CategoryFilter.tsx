@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./CategoryFilter.css";
 
 function CategoryFilter() {
   const [categories, setCategories] = useState<string[]>([]);
@@ -21,20 +22,18 @@ function CategoryFilter() {
   }, []);
 
   return (
-    <div>
+    <div className="category-filter">
       <h5>Project Types</h5>
-      <div>
+      <div className="category-list">
         {categories.map((c) => (
-          <div key={c} className="form-check">
+          <div key={c} className="category-item">
             <input
               type="checkbox"
-              className="form-check-input"
               id={c}
               value={c}
+              className="category-checkbox"
             />
-            <label htmlFor={c} className="form-check-label">
-              {c}
-            </label>
+            <label htmlFor={c}>{c}</label>
           </div>
         ))}
       </div>
