@@ -72,5 +72,51 @@ namespace WaterProject.API.Controllers
             var something = _waterContext.Projects.Where(p => p.ProjectFunctionalityStatus == "Functional").ToList();
             return something;
         }
+
+        [HttpPost("AddProject")]
+        public IActionResult AddProject([FromBody] Project newProject) {
+            _waterContext.Projects.Add(newProject); // Add the new project to the DbContext
+            _waterContext.SaveChanges(); // Save the changes to the database
+            return Ok(newProject); // Return the newly added project as a response
+        }
+
+
+        [HttpPut("UpdateProject/{projectId}")] // Use HttpPut for updating a resource
+        public IActionResult UpdateProject(int projectId, [FromBody] Project updatedProject)
+        {
+            // Find the existing project in the database
+            var existingProject = _waterContext.Projects.Find(projectId);
+           
+            // Update the properties of the existing project
+            existingProject.ProjectName = updatedProject.ProjectName;
+            existingProject.ProjectType = updatedProject.ProjectType;
+            existingProject.ProjectRegionalProgram = updatedProject.ProjectRegionalProgram; // Update the regional program
+            existingProject.ProjectImpact = updatedProject.ProjectImpact; // Update the impact
+            existingProject.ProjectPhase = updatedProject.ProjectPhase; // Update the phase
+            existingProject.ProjectFunctionalityStatus = updatedProject.ProjectFunctionalityStatus;
+
+            _waterContext.Projects.Update(existingProject); // Save the changes to the database
+            _waterContext.SaveChanges(); // Persist the changes to the database
+
+            return Ok(existingProject); // Return the updated project
+        }
+
+
+        [HttpDelete("DeleteProject/{projectId}")] // Use HttpDelete for deleting a resource
+        public IActionResult DeleteProject(int projectId)
+        {
+            // Find the project to delete
+            var project = _waterContext.Projects.Find(projectId);
+            if (project == null)
+            {
+                return NotFound(new {message = "Project not found."}); // Return 404 if the project doesn't exist);
+            }
+
+            _waterContext.Projects.Remove(project); // Remove the project from the DbContext
+            _waterContext.SaveChanges(); // Save the changes to the database
+
+            return NoContent(); // Return 204 No Content to indicate successful deletion
+
+        }
     }
 }
