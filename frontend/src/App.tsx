@@ -5,6 +5,7 @@ import { CartProvider } from "./context/CartContext"; // import the provider
 import ProjectsPage from "./pages/ProjectsPage";
 import DonatePage from "./pages/DonatePage";
 import CartPage from "./pages/CartPage";
+import AdminProjectsPage from "./pages/AdminProjectsPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             element={<DonatePage />}
           />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/adminprojects" element={<AdminProjectsPage />}></Route>
         </Routes>
       </Router>
     </CartProvider>
